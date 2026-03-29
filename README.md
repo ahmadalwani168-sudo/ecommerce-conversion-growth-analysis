@@ -35,7 +35,7 @@ The objective is to identify conversion differences across devices and uncover o
 
 ## Visualization
 
-![Conversion by Device](conversion_by_device.png)
+![Conversion by Device](conversion_by_device.png.png)
 
 ---
 
