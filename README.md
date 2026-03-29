@@ -79,5 +79,4 @@ ORDER BY conversion_rate DESC;
 - BigQuery (SQL)
 - Excel (Visualization)
 - GA4 dataset
-GROUP BY category
-ORDER BY conversion_rate DESC;
+
