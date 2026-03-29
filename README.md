@@ -1,7 +1,8 @@
 # E-commerce Conversion Analysis (GA4 + BigQuery)
 
 ## Overview
-This project analyzes user behavior in an e-commerce funnel using GA4 BigQuery data. The goal is to understand conversion performance across devices and identify opportunities to improve revenue.
+This project analyzes user behavior in an e-commerce funnel using GA4 BigQuery data.  
+The objective is to identify conversion differences across devices and uncover opportunities to improve revenue performance.
 
 ---
 
@@ -12,15 +13,17 @@ This project analyzes user behavior in an e-commerce funnel using GA4 BigQuery d
 ---
 
 ## Methodology
-- Funnel: view_item → purchase
-- Aggregated at user level using `MAX(IF())`
-- Converted events into binary flags (1/0)
+
+- Defined funnel: **view_item → purchase**
+- Aggregated data at **user level** using `MAX(IF())` to avoid duplicate events
+- Created binary event flags (1 = occurred, 0 = not occurred)
 - Calculated totals using `SUM()`
-- Conversion rate calculated using `SAFE_DIVIDE`
+- Computed conversion rate using `SAFE_DIVIDE()` to handle division by zero
+- Segmented results by **device category**
 
 ---
 
-## Results (Conversion Rate by Device)
+## Results
 
 | Device  | Conversion Rate |
 |--------|----------------|
@@ -32,21 +35,25 @@ This project analyzes user behavior in an e-commerce funnel using GA4 BigQuery d
 
 ## Visualization
 
-![Conversion by Device](conversion_by_device.png.png)
+![Conversion by Device](conversion_by_device.png)
 
 ---
 
 ## Key Insights
-- Desktop converts significantly higher than mobile
-- Mobile conversion is ~40% lower → indicates UX issues
-- Tablet shows no conversions (low volume or poor experience)
+
+- Desktop users convert the best (~2.9%)
+- Mobile conversion is ~40% lower than desktop
+- Significant drop-off on mobile suggests friction in the user journey
+- Tablet shows no conversions (likely low traffic or poor UX)
 
 ---
 
 ## Business Recommendations
-- Improve mobile checkout experience
-- Optimize page speed for mobile users
-- Test mobile-specific UX improvements (A/B testing)
+
+- Improve mobile checkout flow (reduce steps, simplify forms)
+- Optimize mobile page speed (critical for conversion)
+- Conduct A/B testing on mobile UX (layout, CTA placement)
+- Analyze mobile drop-off in deeper funnel steps (next step)
 
 ---
 
@@ -71,12 +78,11 @@ SELECT
 FROM funnel
 GROUP BY category
 ORDER BY conversion_rate DESC;
+
+ORDER BY conversion_rate DESC;
 ```
 
----
-
-## Tools
-- BigQuery (SQL)
-- Excel (Visualization)
-- GA4 dataset
-
+### Tools 
+Google BigQuery (SQL)
+Excel (Data Visualization)
+GitHub (Project documentation)
