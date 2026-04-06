@@ -81,6 +81,11 @@ ORDER BY viewed_users DESC;
 * There is a significant drop-off between *view_item* and *add_to_cart*
 ![Conversion by Device](1.png)
 
+## 📊 Dashboard (Power BI)
+
+Below is a dashboard summarizing the funnel performance:
+
+![Dashboard](dashboard.png)
 
 
 ## 💡 Business Recommendations
