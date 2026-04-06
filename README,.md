@@ -91,6 +91,9 @@ ORDER BY viewed_users DESC;
 Below is a dashboard summarizing the funnel performance:
 
 ![Dashboard](Dashboard1.png)
+
+## 📱 Device Analysis
+To further validate the findings, conversion performance was analyzed across device categories.
 ![Dashboard](Dashboard2.png)
 ## 💡 Business Recommendations
 * Optimize landing pages for traffic from Google
