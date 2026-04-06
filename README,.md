@@ -4,7 +4,7 @@
 
 This project analyzes user behavior in an e-commerce funnel using Google Analytics 4 (GA4) data in BigQuery. The goal is to understand how users move through the purchase process and identify where drop-offs occur.
 
-1
+
 
 ## 🎯 Business Problem
 
@@ -79,11 +79,10 @@ ORDER BY viewed_users DESC;
 
 
 ## 📈 Key Insights
-
+* This stage represents the highest leverage point for improving overall conversion performance
 * **Google** drives the highest traffic and total purchases, but has a lower conversion rate
 * **Direct traffic** has a higher conversion rate, indicating stronger purchase intent
-* There is a significant drop-off between *view_item* and *add_to_cart*
-* The largest drop-off occurs between view_item and add_to_cart (≈ 78% drop)
+* There is a significant drop-off between *view_item* and *add_to_cart*, representing the most critical friction point in the funnel
 ![Conversion by Device](1.png)
 
 ## 📊 Dashboard (Power BI)
