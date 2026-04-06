@@ -71,7 +71,11 @@ FROM funnel
 GROUP BY source
 ORDER BY viewed_users DESC;
 ```
+## 📈 Funnel Performance (Step Conversion)
 
+- View → Cart: 21.63%
+- Cart → Checkout: 75.83%
+- Checkout → Purchase: 47.24%
 
 
 ## 📈 Key Insights
@@ -79,18 +83,18 @@ ORDER BY viewed_users DESC;
 * **Google** drives the highest traffic and total purchases, but has a lower conversion rate
 * **Direct traffic** has a higher conversion rate, indicating stronger purchase intent
 * There is a significant drop-off between *view_item* and *add_to_cart*
+* The largest drop-off occurs between view_item and add_to_cart (≈ 78% drop)
 ![Conversion by Device](1.png)
 
 ## 📊 Dashboard (Power BI)
 
 Below is a dashboard summarizing the funnel performance:
 
-![Dashboard](dashboard.png)
-
-
+![Dashboard](Dashboard1.png)
+![Dashboard](Dashboard2.png)
 ## 💡 Business Recommendations
-
 * Optimize landing pages for traffic from Google
+* Improve product page experience to reduce drop-off between view and add-to-cart
 * Improve targeting and ad relevance to increase conversion
 * Leverage direct traffic through loyalty programs and retention strategies
 
@@ -104,4 +108,9 @@ Below is a dashboard summarizing the funnel performance:
 * Data Aggregation (user-level)
 * Business Insight Generation
 
+## 🚀 Key Takeaway
+
+The main issue is not traffic volume, but inefficiency in converting users.
+
+Improving product page experience will likely have a greater impact than increasing traffic.
 
