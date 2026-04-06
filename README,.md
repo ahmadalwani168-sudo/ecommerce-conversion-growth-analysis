@@ -91,9 +91,11 @@ ORDER BY viewed_users DESC;
 Below is a dashboard summarizing the funnel performance:
 
 ![Dashboard](Dashboard1.png)
+The dashboard highlights a major drop-off at the early stage of the funnel, particularly between product view and add-to-cart.
+
 
 ## 📱 Device Analysis
-To further validate the findings, conversion performance was analyzed across device categories.
+This confirms that conversion inefficiencies are consistent across devices, reinforcing that the issue lies within the funnel experience rather than platform differences.
 ![Dashboard](Dashboard2.png)
 ## 💡 Business Recommendations
 * Optimize landing pages for traffic from Google
@@ -113,7 +115,6 @@ To further validate the findings, conversion performance was analyzed across dev
 
 ## 🚀 Key Takeaway
 
-The main issue is not traffic volume, but inefficiency in converting users.
+The highest-impact opportunity is improving the transition from product view to add-to-cart.
 
-Improving product page experience will likely have a greater impact than increasing traffic.
-
+Even small improvements at this stage can significantly increase overall revenue due to the high drop-off rate.
