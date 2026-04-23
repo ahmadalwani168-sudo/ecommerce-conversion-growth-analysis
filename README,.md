@@ -8,7 +8,8 @@ This project analyzes user behavior in an e-commerce funnel using Google Analyti
 
 ## 🎯 Business Problem
 
-High website traffic does not always lead to high sales.
+The company receives strong traffic but experiences significant drop-offs in the purchase funnel, reducing overall conversion performance
+
 This project aims to identify:
 
 * Where users drop off in the funnel
