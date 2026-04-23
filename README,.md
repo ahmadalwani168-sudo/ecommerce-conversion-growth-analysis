@@ -107,6 +107,7 @@ This confirms that conversion inefficiencies are consistent across devices, rein
 
 Below is a funnel visualization showing user drop-off across the purchase journey.
 
+![Dashboard](Dropp-offfunnel.png)
 
 
 ## 🚀 Skills Demonstrated
