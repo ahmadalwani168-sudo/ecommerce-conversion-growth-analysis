@@ -103,6 +103,10 @@ This confirms that conversion inefficiencies are consistent across devices, rein
 * Improve targeting and ad relevance to increase conversion
 * Leverage direct traffic through loyalty programs and retention strategies
 
+### Purchase Funnel Visualization
+
+Below is a funnel visualization showing user drop-off across the purchase journey.
+
 
 
 ## 🚀 Skills Demonstrated
