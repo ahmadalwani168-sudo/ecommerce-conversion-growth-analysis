@@ -107,7 +107,7 @@ This confirms that conversion inefficiencies are consistent across devices, rein
 
 Below is a funnel visualization showing user drop-off across the purchase journey.
 
-![Dashboard](Dropp-offfunnel.png)
+![Dashboard](User_drop-off.png)
 The funnel visualization reveals a substantial decline in user progression at the early stage of the purchasing journey. While a large number of users view products, only a small percentage continue to add items to their cart. This suggests that the primary conversion friction occurs before purchase intent is fully developed.
 
 The relatively stronger conversion rates in later stages of the funnel indicate that users who add products to their cart are significantly more likely to continue toward checkout and purchase.
