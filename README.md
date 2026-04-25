@@ -84,19 +84,19 @@ ORDER BY viewed_users DESC;
 * **Google** drives the highest traffic and total purchases, but has a lower conversion rate
 * **Direct traffic** has a higher conversion rate, indicating stronger purchase intent
 * There is a significant drop-off between *view_item* and *add_to_cart*, representing the most critical friction point in the funnel
-![Conversion by Device](1.png)
+![Conversion by Device](outputs/1.png)
 
 ## 📊 Dashboard (Power BI)
 
 Below is a dashboard summarizing the funnel performance:
 
-![Dashboard](Dashboard1.png)
+![Dashboard](outputs/Dashboard1.png)
 The dashboard highlights a major drop-off at the early stage of the funnel, particularly between product view and add-to-cart.
 
 
 ## 📱 Device Analysis
 This confirms that conversion inefficiencies are consistent across devices, reinforcing that the issue lies within the funnel experience rather than platform differences.
-![Dashboard](Dashboard2.png)
+![Dashboard](outputs/Dashboard2.png)
 ## 💡 Business Recommendations
 * Optimize landing pages for traffic from Google
 * Improve product page experience to reduce drop-off between view and add-to-cart
@@ -107,7 +107,7 @@ This confirms that conversion inefficiencies are consistent across devices, rein
 
 Below is a funnel visualization showing user drop-off across the purchase journey.
 
-![Dashboard](User_drop-off.png)
+![Dashboard](outputs/User_drop-off.png)
 The funnel visualization reveals a substantial decline in user progression at the early stage of the purchasing journey. While a large number of users view products, only a small percentage continue to add items to their cart. This suggests that the primary conversion friction occurs before purchase intent is fully developed.
 
 The relatively stronger conversion rates in later stages of the funnel indicate that users who add products to their cart are significantly more likely to continue toward checkout and purchase.
