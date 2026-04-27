@@ -84,7 +84,7 @@ ORDER BY viewed_users DESC;
 * **Google** drives the highest traffic and total purchases, but has a lower conversion rate
 * **Direct traffic** has a higher conversion rate, indicating stronger purchase intent
 * There is a significant drop-off between *view_item* and *add_to_cart*, representing the most critical friction point in the funnel
-![Conversion by Device](outputs/1.png)
+
 
 ## 📊 Dashboard (Power BI)
 
