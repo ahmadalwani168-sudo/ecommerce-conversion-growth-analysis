@@ -134,7 +134,3 @@ The relatively stronger conversion rates in later stages of the funnel indicate 
 * Conversion Rate Analysis
 * Data Aggregation (user-level)
 * Business Insight Generation
-
-
-
-- Device conversion rates are relatively similar across desktop, mobile, and tablet. This suggests that the main conversion issue is more likely related to the funnel experience itself rather than one specific device type.
