@@ -104,12 +104,20 @@ The dashboard highlights a major drop-off at the early stage of the funnel, part
 ## 📱 Device Analysis
 This confirms that conversion inefficiencies are consistent across devices, reinforcing that the issue lies within the funnel experience rather than platform differences.
 ![Dashboard](outputs/Dashboard2.png)
-## 💡 Business Recommendations
-* Optimize landing pages for traffic from Google
-* Improve product page experience to reduce drop-off between view and add-to-cart
-* Improve targeting and ad relevance to increase conversion
-* Leverage direct traffic through loyalty programs and retention strategies
 
+## 💡 Business Recommendations
+
+- Improve product pages by testing clearer add-to-cart buttons, stronger product descriptions, visible delivery information, and trust signals.
+
+- Investigate the checkout process to identify possible friction points such as unexpected costs, payment issues, or unclear delivery options.
+
+- Analyze Google traffic more deeply, since high traffic volume does not automatically translate into strong conversion performance.
+
+- Improve targeting and ad relevance to attract users with stronger purchase intent.
+
+- Use qualitative methods such as user testing or session recordings to understand why users drop off before adding products to cart.
+
+  
 ### Purchase Funnel Visualization
 
 Below is a funnel visualization showing user drop-off across the purchase journey.
@@ -128,6 +136,5 @@ The relatively stronger conversion rates in later stages of the funnel indicate 
 * Business Insight Generation
 
 
-- Google drives high traffic volume, but traffic volume alone does not guarantee strong conversion performance. This highlights the importance of analyzing both traffic quantity and traffic quality.
 
 - Device conversion rates are relatively similar across desktop, mobile, and tablet. This suggests that the main conversion issue is more likely related to the funnel experience itself rather than one specific device type.
