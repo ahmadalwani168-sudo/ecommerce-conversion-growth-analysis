@@ -80,12 +80,17 @@ ORDER BY viewed_users DESC;
 - Cart → Checkout: 75.83%
 - Checkout → Purchase: 47.24%
 
-
 ## 📈 Key Insights
-* This stage represents the highest leverage point for improving overall conversion performance
-* **Google** drives the highest traffic and total purchases, but has a lower conversion rate
-* **Direct traffic** has a higher conversion rate, indicating stronger purchase intent
-* There is a significant drop-off between *view_item* and *add_to_cart*, representing the most critical friction point in the funnel
+
+- The largest drop-off occurs between `view_item` and `add_to_cart`. Only 21.63% of users who viewed a product added it to their cart. This suggests that the main friction happens early in the decision-making process, before users show strong purchase intent.
+
+- The transition from `add_to_cart` to `begin_checkout` performs relatively well, with a step conversion rate of 75.83%. This indicates that users who add products to their cart are more likely to continue toward checkout.
+
+- The checkout stage still shows meaningful friction. Only 47.24% of users who started checkout completed a purchase, suggesting possible issues such as unexpected costs, lack of trust, payment friction, or delivery concerns.
+
+- Google drives high traffic volume, but traffic volume alone does not guarantee strong conversion performance. This highlights the importance of analyzing both traffic quantity and traffic quality.
+
+- Device conversion rates are relatively similar across desktop, mobile, and tablet. This suggests that the main conversion issue is more likely related to the funnel experience itself rather than one specific device type.
 
 
 ## 📊 Dashboard (Power BI)
@@ -122,8 +127,7 @@ The relatively stronger conversion rates in later stages of the funnel indicate 
 * Data Aggregation (user-level)
 * Business Insight Generation
 
-## 🚀 Key Takeaway
 
-The highest-impact opportunity is improving the transition from product view to add-to-cart.
+- Google drives high traffic volume, but traffic volume alone does not guarantee strong conversion performance. This highlights the importance of analyzing both traffic quantity and traffic quality.
 
-Even small improvements at this stage can significantly increase overall revenue due to the high drop-off rate.
+- Device conversion rates are relatively similar across desktop, mobile, and tablet. This suggests that the main conversion issue is more likely related to the funnel experience itself rather than one specific device type.
