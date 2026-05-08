@@ -129,8 +129,10 @@ The relatively stronger conversion rates in later stages of the funnel indicate 
 
 ## 🚀 Skills Demonstrated
 
-* SQL (BigQuery)
-* Funnel Analysis
-* Conversion Rate Analysis
-* Data Aggregation (user-level)
-* Business Insight Generation
+- SQL (BigQuery)
+- Funnel Analysis
+- Conversion Rate Analysis
+- Data Aggregation (user-level)
+- Business Insight Generation
+- Marketing Analytics
+- Business Recommendations
