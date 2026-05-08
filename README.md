@@ -26,19 +26,24 @@ This project aims to answer three key questions:
 
 ### Funnel Definition
 
-* View Item
-* Add to Cart
-* Begin Checkout
-* Purchase
+The funnel was defined using four GA4 e-commerce events:
+
+- `view_item`
+- `add_to_cart`
+- `begin_checkout`
+- `purchase`
 
 ### Approach
 
-* Aggregated data at **user level** using `MAX(IF())`
-* Counted users per step using `COUNTIF()`
-* Calculated conversion rate using `SAFE_DIVIDE()`
+- Aggregated data at user level using `MAX(IF())`
+- Counted users per funnel step using `COUNTIF()`
+- Calculated conversion rates using `SAFE_DIVIDE()`
+- Compared conversion performance across traffic sources and devices
+
+User-level aggregation was used to avoid counting the same user multiple times when analyzing funnel progression.
 
 
-## 💻 SQL (Core Query)
+## SQL: Conversion Rate by Traffic Source
 
 ```sql
 WITH funnel AS (
