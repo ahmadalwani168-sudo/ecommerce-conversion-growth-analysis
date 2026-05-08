@@ -1,21 +1,18 @@
-# E-commerce Conversion Analysis (GA4 + BigQuery)
+# E-commerce Funnel Analysis using GA4 and BigQuery
 
-## 📊 Overview
+## Project Overview
 
-This project analyzes user behavior in an e-commerce funnel using Google Analytics 4 (GA4) data in BigQuery. The goal is to understand how users move through the purchase process and identify where drop-offs occur.
+This project analyzes user behavior in an e-commerce purchase funnel using Google Analytics 4 (GA4) data in BigQuery. The goal is to identify where users drop off before completing a purchase and how conversion performance varies across traffic sources and devices.
 
+## Business Problem
 
+The business receives a high number of product views, but many users do not continue toward purchase. This creates a need to understand where friction occurs in the funnel and which channels bring users with stronger purchase intent.
 
-## 🎯 Business Problem
+This project aims to answer three key questions:
 
-The company receives strong traffic but experiences significant drop-offs in the purchase funnel, reducing overall conversion performance
-
-This project aims to identify:
-
-* Where users drop off in the funnel
-* Which traffic sources perform best
-* How conversion rates vary across channels
-
+- Where do users drop off in the purchase funnel?
+- Which traffic sources generate the strongest conversion performance?
+- Do conversion rates vary across devices?
 
 
 ## 📁 Data
