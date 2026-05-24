@@ -103,7 +103,7 @@ The dashboard highlights a major drop-off at the early stage of the funnel, part
 
 ### Device Performance Analysis
 This confirms that conversion inefficiencies are consistent across devices, reinforcing that the issue lies within the funnel experience rather than platform differences.
-![Dashboard](outputs/Dashboard2.png)
+![Dashboard](device_analysis.png)
 The analysis showed relatively similar conversion rates across mobile, desktop, and tablet devices.
 
 Although desktop generated the highest number of purchases overall, mobile users also showed strong conversion performance due to high traffic volume.
