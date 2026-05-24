@@ -101,9 +101,49 @@ Below is a dashboard summarizing the funnel performance:
 The dashboard highlights a major drop-off at the early stage of the funnel, particularly between product view and add-to-cart.
 
 
-## 📱 Device Analysis
+### Device Performance Analysis
 This confirms that conversion inefficiencies are consistent across devices, reinforcing that the issue lies within the funnel experience rather than platform differences.
 ![Dashboard](outputs/Dashboard2.png)
+The analysis showed relatively similar conversion rates across mobile, desktop, and tablet devices.
+
+Although desktop generated the highest number of purchases overall, mobile users also showed strong conversion performance due to high traffic volume.
+
+This suggests that the main conversion limitations may not be device-specific, but instead related to broader funnel or user experience factors affecting all platforms.
+
+The analysis was performed using user-level aggregation in BigQuery to avoid duplicate event counting and improve conversion accuracy.
+
+## Device-Based Funnel Analysis
+To better understand user behavior across different devices, a user-level funnel analysis was created using SQL in BigQuery. The analysis focused on the following funnel stages: - view_item - add_to_cart - begin_checkout - purchase A Common Table Expression (CTE) and MAX(IF()) logic were used to create funnel stage flags for each user. This helped avoid duplicate event counting and made the analysis more accurate on a user level instead of an event level. The analysis compared conversion behavior across: - Mobile - Desktop - Tablet ### Key Insight The results showed differences in conversion behavior between devices. Mobile users generated a high number of product views, while desktop users showed different purchasing behavior. This highlights the importance of: - Device-specific analysis - User-level aggregation - Funnel optimization - Understanding user behavior across platforms ### SQL Example
+sql
+WITH funnel AS (
+  SELECT
+    user_pseudo_id,
+    device.category AS device_category,
+    
+    MAX(IF(event_name = 'view_item', 1, 0)) AS viewed_flag,
+    MAX(IF(event_name = 'purchase', 1, 0)) AS purchase_flag
+
+  FROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+
+  WHERE event_name IN (
+    'view_item',
+    'add_to_cart',
+    'begin_checkout',
+    'purchase'
+  )
+
+  GROUP BY user_pseudo_id, device_category
+)
+
+SELECT
+  device_category,
+  SUM(viewed_flag) AS viewed_users,
+  SUM(purchase_flag) AS purchased,
+  SUM(purchase_flag) / SUM(viewed_flag) AS conversion_rate
+
+FROM funnel
+
+GROUP BY device_category
 
 ## 💡 Business Recommendations
 
