@@ -93,22 +93,36 @@ ORDER BY viewed_users DESC;
 - Device conversion rates are relatively similar across desktop, mobile, and tablet. This suggests that the main conversion issue is more likely related to the funnel experience itself rather than one specific device type.
 
 
+
 ## 📊 Dashboard (Power BI)
 
-Below is a dashboard summarizing the funnel performance:
+### Purchase Funnel Visualization
+
+Below is a funnel visualization showing user drop-off across the purchase journey.
+
+![Dashboard](outputs/Purchase_Funnel_Visualization.png)
+
+The funnel visualization reveals a substantial decline in user progression at the early stage of the purchasing journey. While a large number of users view products, only a small percentage continue to add items to their cart. This suggests that the primary conversion friction occurs before purchase intent is fully developed.
+
+The relatively stronger conversion rates in later stages of the funnel indicate that users who add products to their cart are significantly more likely to continue toward checkout and purchase.
+
+### Funnel Performance Dashboard
+
+Below is a dashboard summarizing the funnel performance.
 
 ![Dashboard](outputs/Dashboard1.png)
+
 The dashboard highlights a major drop-off at the early stage of the funnel, particularly between product view and add-to-cart.
 
-
 ### Device Performance Analysis
-This confirms that conversion inefficiencies are consistent across devices, reinforcing that the issue lies within the funnel experience rather than platform differences.
+
+Below is a device-based analysis showing purchases and conversion rates across desktop, mobile, and tablet users.
+
 ![Dashboard](device_analysis.png)
+
 The analysis showed relatively similar conversion rates across mobile, desktop, and tablet devices.
 
-Although desktop generated the highest number of purchases overall, mobile users also showed strong conversion performance due to high traffic volume.
-
-This suggests that the main conversion limitations may not be device-specific, but instead related to broader funnel or user experience factors affecting all platforms.
+Although desktop generated the highest number of purchases overall, mobile contributed a high traffic volume. This suggests that the main conversion limitations may not be device-specific, but instead related to broader funnel or user experience factors affecting all platforms.
 
 The analysis was performed using user-level aggregation in BigQuery to avoid duplicate event counting and improve conversion accuracy.
 
@@ -145,7 +159,7 @@ WITH funnel AS (
   SELECT
     user_pseudo_id,
     device.category AS device_category,
-    
+
     MAX(IF(event_name = 'view_item', 1, 0)) AS viewed_flag,
     MAX(IF(event_name = 'purchase', 1, 0)) AS purchase_flag
 
@@ -158,29 +172,27 @@ WITH funnel AS (
     'purchase'
   )
 
-  GROUP BY user_pseudo_id, device_category
+  GROUP BY
+    user_pseudo_id,
+    device_category
 )
 
 SELECT
   device_category,
   SUM(viewed_flag) AS viewed_users,
   SUM(purchase_flag) AS purchased,
-  SUM(purchase_flag) / SUM(viewed_flag) AS conversion_rate
+  
+  ROUND(
+    SAFE_DIVIDE(
+      SUM(purchase_flag),
+      SUM(viewed_flag)
+    ) * 100,
+    2
+  ) AS conversion_rate
 
 FROM funnel
 
 GROUP BY device_category
-
-SELECT
-  device_category,
-  SUM(viewed_flag) AS viewed_users,
-  SUM(purchase_flag) AS purchased,
-  SUM(purchase_flag) / SUM(viewed_flag) AS conversion_rate
-
-FROM funnel
-
-GROUP BY device_category
-ظ
 ```
 ### 💡 Business Recommendations
 
@@ -193,16 +205,11 @@ GROUP BY device_category
 - Improve targeting and ad relevance to attract users with stronger purchase intent.
 
 - Use qualitative methods such as user testing or session recordings to understand why users drop off before adding products to cart.
-
-  
-### Purchase Funnel Visualization
-
-Below is a funnel visualization showing user drop-off across the purchase journey.
-
-![Dashboard](outputs/Purchase_Funnel_Visualization.png)
-The funnel visualization reveals a substantial decline in user progression at the early stage of the purchasing journey. While a large number of users view products, only a small percentage continue to add items to their cart. This suggests that the primary conversion friction occurs before purchase intent is fully developed.
-
-The relatively stronger conversion rates in later stages of the funnel indicate that users who add products to their cart are significantly more likely to continue toward checkout and purchase.
+  ## Limitations
+- The dataset is a public GA4 sample dataset and may not fully represent real business performance.
+- The data is anonymized and obfuscated, which limits deeper customer-level, demographic, and geographic analysis.
+- The analysis focuses on funnel behavior and conversion rates, but does not include marketing costs, profit margins, or return data.
+- The results should be interpreted as analytical insights, not exact business performance measurements.
 
 ## 🚀 Skills Demonstrated
 
