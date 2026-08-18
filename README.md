@@ -1,49 +1,34 @@
-# E-commerce Funnel Analysis using GA4 and BigQuery
+# Konverteringsanalyse for nettbutikk
 
-## Project Overview
+**GA4 | BigQuery | SQL | Power BI**
 
-This project analyzes user behavior in an e-commerce purchase funnel using Google Analytics 4 (GA4) data in BigQuery. The goal is to identify where users drop off before completing a purchase and how conversion performance varies across traffic sources and devices.
+I dette prosjektet analyserer jeg kjøpsreisen i en nettbutikk ved hjelp av data fra Google Analytics 4. Målet var å finne ut hvor brukerne faller fra før kjøp, og om konverteringen varierer mellom trafikkilder og enheter.
 
-## Business Problem
+## Problemstilling
 
-The business receives a high number of product views, but many users do not continue toward purchase. This creates a need to understand where friction occurs in the funnel and which channels bring users with stronger purchase intent.
+Analysen tar utgangspunkt i tre spørsmål:
 
-This project aims to answer three key questions:
+- Hvor i kjøpsreisen faller flest brukere fra?
+- Hvordan varierer trafikk og kjøp mellom ulike trafikkilder?
+- Er det tydelige forskjeller i konvertering mellom enheter?
 
-- Where do users drop off in the purchase funnel?
-- Which traffic sources generate the strongest conversion performance?
-- Do conversion rates vary across devices?
+## Datagrunnlag og metode
 
+Analysen bruker Googles offentlige GA4-datasett i BigQuery:
 
-## 📁 Data
+`bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
 
-* Source: Google Analytics 4 (BigQuery public dataset)
-* Table: `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
+Kjøpsreisen ble definert med fire hendelser:
 
+`view_item → add_to_cart → begin_checkout → purchase`
 
+Jeg aggregerte data på brukernivå med `MAX(IF())` for å unngå at gjentatte hendelser fra samme bruker ble telt flere ganger.
 
-## 🧠 Methodology
+Deretter brukte jeg blant annet `COUNTIF()` og `SAFE_DIVIDE()` for å beregne antall brukere og konverteringsrater.
 
-### Funnel Definition
+## SQL-eksempel
 
-The funnel was defined using four GA4 e-commerce events:
-
-- `view_item`
-- `add_to_cart`
-- `begin_checkout`
-- `purchase`
-
-### Approach
-
-- Aggregated data at user level using `MAX(IF())`
-- Counted users per funnel step using `COUNTIF()`
-- Calculated conversion rates using `SAFE_DIVIDE()`
-- Compared conversion performance across traffic sources and devices
-
-User-level aggregation was used to avoid counting the same user multiple times when analyzing funnel progression.
-
-
-## SQL: Conversion Rate by Traffic Source
+Eksemplet under beregner konvertering fra produktvisning til kjøp per trafikkilde.
 
 ```sql
 WITH funnel AS (
@@ -64,159 +49,75 @@ SELECT
   source,
   COUNTIF(viewed_item = 1) AS viewed_users,
   COUNTIF(purchased = 1) AS purchased_users,
+
   ROUND(
     SAFE_DIVIDE(
       COUNTIF(purchased = 1),
       COUNTIF(viewed_item = 1)
-    ) * 100, 2
-  ) AS conversion_rate
-FROM funnel
-GROUP BY source
-ORDER BY viewed_users DESC;
-```
-## 📈 Funnel Performance (Step Conversion)
-
-- View → Cart: 21.63%
-- Cart → Checkout: 75.83%
-- Checkout → Purchase: 47.24%
-
-## 📈 Key Insights
-
-- The largest drop-off occurs between `view_item` and `add_to_cart`. Only 21.63% of users who viewed a product added it to their cart. This suggests that the main friction happens early in the decision-making process, before users show strong purchase intent.
-
-- The transition from `add_to_cart` to `begin_checkout` performs relatively well, with a step conversion rate of 75.83%. This indicates that users who add products to their cart are more likely to continue toward checkout.
-
-- The checkout stage still shows meaningful friction. Only 47.24% of users who started checkout completed a purchase, suggesting possible issues such as unexpected costs, lack of trust, payment friction, or delivery concerns.
-
-- Google drives high traffic volume, but traffic volume alone does not guarantee strong conversion performance. This highlights the importance of analyzing both traffic quantity and traffic quality.
-
-- Device conversion rates are relatively similar across desktop, mobile, and tablet. This suggests that the main conversion issue is more likely related to the funnel experience itself rather than one specific device type.
-
-
-
-## 📊 Dashboard (Power BI)
-
-### Purchase Funnel Visualization
-
-Below is a funnel visualization showing user drop-off across the purchase journey.
-
-![Dashboard](outputs/Purchase_Funnel_Visualization.png)
-
-The funnel visualization reveals a substantial decline in user progression at the early stage of the purchasing journey. While a large number of users view products, only a small percentage continue to add items to their cart. This suggests that the primary conversion friction occurs before purchase intent is fully developed.
-
-The relatively stronger conversion rates in later stages of the funnel indicate that users who add products to their cart are significantly more likely to continue toward checkout and purchase.
-
-### Funnel Performance Dashboard
-
-Below is a dashboard summarizing the funnel performance.
-
-![Dashboard](Funnel_dashboard.png)
-
-The dashboard highlights a major drop-off at the early stage of the funnel, particularly between product view and add-to-cart.
-
-### Device Performance Analysis
-
-Below is a device-based analysis showing purchases and conversion rates across desktop, mobile, and tablet users.
-
-![Dashboard](device_analysis.png)
-
-The analysis showed relatively similar conversion rates across mobile, desktop, and tablet devices.
-
-Although desktop generated the highest number of purchases overall, mobile contributed a high traffic volume. This suggests that the main conversion limitations may not be device-specific, but instead related to broader funnel or user experience factors affecting all platforms.
-
-The analysis was performed using user-level aggregation in BigQuery to avoid duplicate event counting and improve conversion accuracy.
-
-## Device-Based Funnel Analysis
-
-To better understand user behavior across different devices, a user-level funnel analysis was created using SQL in BigQuery.
-
-The analysis focused on the following funnel stages:
-- view_item
-- add_to_cart
-- begin_checkout
-- purchase
-
-A Common Table Expression (CTE) and `MAX(IF())` logic were used to create funnel stage flags for each user. This helped avoid duplicate event counting and made the analysis more accurate on a user level instead of an event level.
-
-The analysis compared conversion behavior across:
-- Mobile
-- Desktop
-- Tablet
-
-### Key Insight
-The results showed differences in conversion behavior between devices. Mobile users generated a high number of product views, while desktop users showed different purchasing behavior.
-
-This highlights the importance of:
-- Device-specific analysis
-- User-level aggregation
-- Funnel optimization
-- Understanding user behavior across platforms
-
-### SQL Example
-
-```sql
-WITH funnel AS (
-  SELECT
-    user_pseudo_id,
-    device.category AS device_category,
-
-    MAX(IF(event_name = 'view_item', 1, 0)) AS viewed_flag,
-    MAX(IF(event_name = 'purchase', 1, 0)) AS purchase_flag
-
-  FROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`
-
-  WHERE event_name IN (
-    'view_item',
-    'add_to_cart',
-    'begin_checkout',
-    'purchase'
-  )
-
-  GROUP BY
-    user_pseudo_id,
-    device_category
-)
-
-SELECT
-  device_category,
-  SUM(viewed_flag) AS viewed_users,
-  SUM(purchase_flag) AS purchased,
-  
-  ROUND(
-    SAFE_DIVIDE(
-      SUM(purchase_flag),
-      SUM(viewed_flag)
     ) * 100,
     2
   ) AS conversion_rate
 
 FROM funnel
-
-GROUP BY device_category
+GROUP BY source
+ORDER BY viewed_users DESC;
 ```
-### 💡 Business Recommendations
 
-- Improve product pages by testing clearer add-to-cart buttons, stronger product descriptions, visible delivery information, and trust signals.
+## Viktigste funn
 
-- Investigate the checkout process to identify possible friction points such as unexpected costs, payment issues, or unclear delivery options.
+Den største reduksjonen i antall brukere skjer tidlig i kjøpsreisen.
 
-- Analyze Google traffic more deeply, since high traffic volume does not automatically translate into strong conversion performance.
+- **20,12 %** gikk fra produktvisning til handlekurv.
+- **74,13 %** gikk fra handlekurv til checkout.
+- **44,21 %** gikk fra checkout til kjøp.
+- Samlet konvertering fra produktvisning til kjøp var omtrent **6,60 %**.
 
-- Improve targeting and ad relevance to attract users with stronger purchase intent.
+Resultatene viser dermed at det største forbedringspotensialet ligger mellom produktvisning og handlekurv.
 
-- Use qualitative methods such as user testing or session recordings to understand why users drop off before adding products to cart.
-  ## Limitations
-- The dataset is a public GA4 sample dataset and may not fully represent real business performance.
-- The data is anonymized and obfuscated, which limits deeper customer-level, demographic, and geographic analysis.
-- The analysis focuses on funnel behavior and conversion rates, but does not include marketing costs, profit margins, or return data.
-- The results should be interpreted as analytical insights, not exact business performance measurements.
+## Dashboard
 
-## 🚀 Skills Demonstrated
+Power BI-dashboardet viser trafikk og kjøp fordelt på trafikkilde, sammen med konverteringen mellom stegene i kjøpsreisen.
 
-- SQL (BigQuery)
-- Funnel Analysis
-- Conversion Rate Analysis
-- Data Aggregation (user-level)
-- Business Insight Generation
-- Marketing Analytics
-- Business Recommendations
+![Funnel dashboard](Funnel_dashboard.png)
+
+Google står for flest produktvisninger i datasettet, men analysen viser også hvorfor trafikkvolum alene ikke er nok til å vurdere kvaliteten på en trafikkilde. Konvertering må vurderes sammen med volum.
+
+## Analyse etter enhet
+
+Jeg undersøkte også om konverteringen var tydelig forskjellig mellom desktop, mobil og nettbrett.
+
+![Analyse etter enhet](device_analysis.png)
+
+Resultatene viste relativt små forskjeller i konverteringsrate mellom enhetene. Det tyder på at frafallet tidlig i kjøpsreisen ikke kan forklares av én bestemt enhet alene.
+
+## Anbefalinger
+
+Basert på analysen ville jeg prioritert å undersøke steget mellom produktvisning og handlekurv nærmere.
+
+Aktuelle neste steg kan være:
+
+- teste produktinformasjon og plassering av kjøpsknappen
+- undersøke om pris, frakt eller levering er tydelig nok på produktsiden
+- sammenligne konvertering mellom trafikkilder mer detaljert
+- bruke A/B-testing eller brukerundersøkelser for å finne årsaken til frafallet
+
+Analysen viser **hvor** det største frafallet skjer, men ikke alene **hvorfor** det skjer. Derfor bør årsaken testes før større endringer gjennomføres.
+
+## Begrensninger
+
+Datasettet er et offentlig og anonymisert GA4-eksempeldatasett. Analysen inneholder derfor ikke blant annet markedsføringskostnader, marginer eller kundedata som ville vært tilgjengelig i en reell virksomhet.
+
+Funnel-analysen er aggregert på brukernivå (`user_pseudo_id`). Den identifiserer om en bruker har utført de ulike funnel-hendelsene i analyseperioden, men sikrer ikke at hendelsene skjedde i samme sesjon eller i en bestemt kronologisk rekkefølge. En videre analyse kan bygge en session-basert sekvensiell funnel ved hjelp av `ga_session_id` og `event_timestamp`.
+
+Resultatene bør derfor brukes som et analyseeksempel, ikke som faktiske forretningsresultater.
+
+## Verktøy og ferdigheter
+
+- SQL og BigQuery
+- Google Analytics 4
+- Power BI
+- Funnelanalyse
+- Konverteringsanalyse
+- Brukerbasert aggregering
+- Datavisualisering
+- Analyse og anbefalinger
