@@ -110,7 +110,7 @@ The relatively stronger conversion rates in later stages of the funnel indicate 
 
 Below is a dashboard summarizing the funnel performance.
 
-![Dashboard](outputs/Dashboard1.png)
+![Dashboard](Funnel_dashboard.png)
 
 The dashboard highlights a major drop-off at the early stage of the funnel, particularly between product view and add-to-cart.
 
